@@ -18,10 +18,10 @@ class AppleSignIn {
 
   static const _errorCodeCancelled = 1001;
 
-  static Stream<void> _onCredentialRevoked;
+  static Stream<void>? _onCredentialRevoked;
 
   /// A stream that emits an event when Apple ID credentials have been revoked.
-  static Stream<void> get onCredentialRevoked {
+  static Stream<void>? get onCredentialRevoked {
     if (_onCredentialRevoked == null) {
       _onCredentialRevoked = _eventChannel.receiveBroadcastStream();
     }
@@ -132,25 +132,25 @@ class AppleSignIn {
 class CredentialState {
   final CredentialStatus status;
 
-  final NsError error;
+  final NsError? error;
 
-  const CredentialState({@required this.status, this.error});
+  const CredentialState({required this.status, this.error});
 }
 
 @immutable
 class NsError {
-  final int code;
+  final int? code;
 
-  final String domain;
+  final String? domain;
 
-  final String localizedDescription;
+  final String? localizedDescription;
 
-  final String localizedRecoverySuggestion;
+  final String? localizedRecoverySuggestion;
 
-  final String localizedFailureReason;
+  final String? localizedFailureReason;
 
   @override
-  String toString() => localizedDescription;
+  String toString() => localizedDescription!;
 
   const NsError(
       {this.code,
@@ -193,12 +193,12 @@ enum CredentialStatus {
 class AuthorizationResult {
   final AuthorizationStatus status;
 
-  final AppleIdCredential credential;
+  final AppleIdCredential? credential;
 
-  final NsError error;
+  final NsError? error;
 
   const AuthorizationResult({
-    @required this.status,
+    required this.status,
     this.credential,
     this.error,
   });

@@ -5,9 +5,9 @@ import 'open_id_operation.dart';
 /// A base class for different kinds of authorization requests.
 @immutable
 abstract class AuthorizationRequest {
-  final OpenIdOperation requestedOperation;
+  final OpenIdOperation? requestedOperation;
 
-  final List<Scope> requestedScopes;
+  final List<Scope>? requestedScopes;
 
   Map<String, dynamic> toMap();
 
@@ -25,12 +25,12 @@ class AppleIdRequest extends AuthorizationRequest {
   /// Typically you leave this property set to null the first time you authenticate a user. Otherwise, if you previously received an authorization containing an ASAuthorizationAppleIDCredential instance, set this property to the value from the credential’s user property.
   ///
   /// The value is an arbitrary string that’s portable among apps from a single developer, but not between apps from different developers.
-  final String user;
+  final String? user;
 
   const AppleIdRequest({
     this.user,
     OpenIdOperation requestedOperation = OpenIdOperation.operationLogin,
-    List<Scope> requestedScopes,
+    List<Scope>? requestedScopes,
   }) : super(
           requestedOperation: requestedOperation,
           requestedScopes: requestedScopes,
@@ -40,7 +40,7 @@ class AppleIdRequest extends AuthorizationRequest {
     return {
       'requestType': 'AppleIdRequest',
       'user': user,
-      'requestedOperation': requestedOperation.value,
+      'requestedOperation': requestedOperation!.value,
       'requestedScopes':
           requestedScopes?.map((scope) => scope.value)?.toList() ?? []
     };
