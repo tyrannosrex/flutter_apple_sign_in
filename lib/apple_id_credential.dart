@@ -58,7 +58,7 @@ class AppleIdCredential {
 
   static List<Scope> _scopesFromList(List? list) {
     if (list == null) {
-      return List();
+      return [];
     }
 
     return list.map((scope) => Scope.rawValue(scope)).toList();
